@@ -1,1 +1,1 @@
-# heterogenous-PFR
+# heterogeneous-PFR
