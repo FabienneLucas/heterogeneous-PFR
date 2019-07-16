@@ -29,57 +29,57 @@ def main():
     # Reactor variables
     L_reactor = 1.0        	# Length of reactor (m)
     velocity_inlet = 1.0    # Velocity of the entering reactant gas mixture (m/s)
-    R_cycl = 0.10           # Radius of the reactor (m)
+    R_cycl = 2.5e-2         # Radius of the reactor (m)
     
     # Variables for concentration profile
-    c_A_in = 209.06         # Inlet feed concentration of A (mol/m3)
-    c_B_in = 209.06         # Inlet feed concentration of B (mol/m3)
+    c_A_in = 240.56         # Inlet feed concentration of A (mol/m3)
+    c_B_in = 240.56         # Inlet feed concentration of B (mol/m3)
     c_C_in = 0.0            # Inlet feed concentration of C (mol/m3)
     c_N_in = 0.0            # Inlet feed concentration of N (mol/m3)
     
-    D_f_A = 1e-5            # Diffusion coefficient of reactant A in gas (m2/s)
-    D_f_B = 1e-5            # Diffusion coefficient of reactant B in gas (m2/s)
-    D_f_C = 1e-5            # Diffusion coefficient of reactant C in gas (m2/s)
-    D_f_N = 1e-5            # Diffusion coefficient of reactant N in gas (m2/s)
+    D_f_A = 1.0e-4          # Diffusion coefficient of reactant A in gas (m2/s)
+    D_f_B = 1.0e-4          # Diffusion coefficient of reactant B in gas (m2/s)
+    D_f_C = 1.0e-4          # Diffusion coefficient of reactant C in gas (m2/s)
+    D_f_N = 1.0e-4          # Diffusion coefficient of reactant N in gas (m2/s)
     D_f_total = (D_f_A+D_f_B+D_f_C+D_f_N)/4         # Diffusion coefficient of gas mixture (m2/s)
     
     mu = 1e-5               # Dynamic viscocity of gas mixture (m2/s)
     
     # Variables for temperature profile
-    rho_A = 1.0             # Density of the reactant A (kg / m3)
-    rho_B = 1.0             # Density of the reactant B (kg / m3)
-    rho_C = 1.0             # Density of the reactant C (kg / m3)
-    rho_N = 1.0             # Density of the reactant N (kg / m3)
+    rho_A = 5.0             # Density of the reactant A (kg / m3)
+    rho_B = 5.0             # Density of the reactant B (kg / m3)
+    rho_C = 5.0             # Density of the reactant C (kg / m3)
+    rho_N = 5.0             # Density of the reactant N (kg / m3)
     rho_total = (rho_A+rho_B+rho_C+rho_N)/4       # Density of gas mixture (kg / m3)
     
-    Cp_A = 1e3              # Specific heat capacity of the reactant A (Joule/(Kg.K))
-    Cp_B = 1e3              # Specific heat capacity of the reactant B (Joule/(Kg.K))
-    Cp_C = 1e3              # Specific heat capacity of the reactant B (Joule/(Kg.K))
-    Cp_N = 1e3              # Specific heat capacity of the reactant C (Joule/(Kg.K))
+    Cp_A = 1.0e3            # Specific heat capacity of the reactant A (Joule/(Kg.K))
+    Cp_B = 1.0e3            # Specific heat capacity of the reactant B (Joule/(Kg.K))
+    Cp_C = 1.0e3            # Specific heat capacity of the reactant B (Joule/(Kg.K))
+    Cp_N = 1.0e3            # Specific heat capacity of the reactant C (Joule/(Kg.K))
     Cp_total = (Cp_A+Cp_B+Cp_C+Cp_N)/4            # Specific heat capacity of the gas mixture (Joule/(Kg.K))
     
     T_in = 500.0            # Inlet temperature (K)
     
-    k_f = 0.0025            # Thermal conductivity of gas mixture (Watt/(m.K))
+    k_f = 0.14              # Thermal conductivity of gas mixture (Watt/(m.K))
     
     T_wall = 373.15         # Temperature of the reactor wall (K) (condensing steam)
     a = 2/R_cycl
     
     # Variables for solid phase 
     e = 0.5                 # Void fraction present in the reactor (-)
-    d_particle = 0.01       # Diameter of particle (m)
+    d_particle = 0.02       # Diameter of particle (m)
     r_particle = d_particle/2
     
-    D_s_A = 2e-5            # Diffusivity of the reactant A in the porous solid catalyst (m2/s)
-    D_s_B = 2e-5            # Diffusivity of the reactant B in the porous solid catalyst (m2/s)
-    D_s_C = 2e-5            # Diffusivity of the reactant C in the porous solid catalyst (m2/s)
-    k_s = 50e-3             # Thermal conductivity of the solid catalyst (Watt/(m.K))
+    D_s_A = 7.5e-7          # Diffusivity of the reactant A in the porous solid catalyst (m2/s)
+    D_s_B = 7.5e-7          # Diffusivity of the reactant B in the porous solid catalyst (m2/s)
+    D_s_C = 7.5e-7          # Diffusivity of the reactant C in the porous solid catalyst (m2/s)
+    k_s = 0.5               # Thermal conductivity of the solid catalyst (Watt/(m.K))
     
-    rho_Cp_solid = 950*1000 # Product of density and specific heat capacity of the solid catalyst
+    rho_Cp_solid = 1.0e5    # Product of density and specific heat capacity of the solid catalyst
 
     # Kinetic parameters
-    delta_H = 120e3         # Exothermicity (J/mol)
-    Ea = 80e3               # Activation energy (J/mol)
+    delta_H = 1.2e5         # Exothermicity (J/mol)
+    Ea = 8.0e4              # Activation energy (J/mol)
     R = 8.314               # Gas constant (J/(K*mol))
     k0 = 3.98e9             # Arrhenius pre-factor (1/s)
     
@@ -95,7 +95,7 @@ def main():
     N_grid_particle = 40
     
     # Computational stencil parameters
-    delta_t = 1e-3                                # Time-step value (s)
+    delta_t = 1.0e-3                              # Time-step value (s)
     delta_x = L_reactor / N_grid_reactor          # Grid size for reactor transport (m)
     delta_r = r_particle / N_grid_particle        # Grid size for particle transport (m)
     
@@ -144,7 +144,7 @@ def main():
     molfraction_N = conc_N_current / (conc_A_current + conc_B_current + conc_C_current + conc_N_current)
     
     """
-    5. Plotting the numerical and analytical solution
+    5. Plotting the numerical solution
     """
     # Plot of the molar fractions of reactants and temperature in the fluid phase
     fig = plt.subplots(2,2, figsize = (12,8))
@@ -264,9 +264,9 @@ def solver(L_reactor, d_particle, velocity_inlet, spacesteps, spacesteps_solid, 
             molfraction[3] = conc_N_current[i]/(conc_A_current[i] + conc_B_current[i] + conc_C_current[i] + conc_N_current[i])
             rho_i = rho[4] #((molfraction[0]*rho[0])+(molfraction[1]*rho[1])+(molfraction[2]*rho[2])+(molfraction[3]*rho[3]))
             # Calculate the mass tranfer coefficient
-            k_mass_transfer_A = mass_transfer_coefficient(d_particle, velocity_current, 0, D_f, mu, rho_i, e)
-            k_mass_transfer_B = mass_transfer_coefficient(d_particle, velocity_current, 1, D_f, mu, rho_i, e)
-            k_mass_transfer_C = mass_transfer_coefficient(d_particle, velocity_current, 2, D_f, mu, rho_i, e)
+            k_mass_transfer_A = mass_transfer_coefficient(d_particle, velocity_current, 0, D_f, mu, rho, e)
+            k_mass_transfer_B = mass_transfer_coefficient(d_particle, velocity_current, 1, D_f, mu, rho, e)
+            k_mass_transfer_C = mass_transfer_coefficient(d_particle, velocity_current, 2, D_f, mu, rho, e)
             # Calculate the Prandlt number 
             Pr = (Cp[4]*mu)/k_f
             # Calculate the heat transfer coefficient
@@ -330,6 +330,7 @@ def solver(L_reactor, d_particle, velocity_inlet, spacesteps, spacesteps_solid, 
     
     vector_A[spacesteps] = 0
     vector_B[spacesteps] = 0
+    vector_C[spacesteps] = 0
     vector_N[spacesteps] = 0
     vector_T[spacesteps] = 0
     
@@ -436,10 +437,11 @@ def generate_matrix_concentration_solid_phase(d_particle, delta_r, spacesteps_so
         matrix[i,i-1] = gamma*(-1.0 + (step / r[i]))
         matrix[i,i+1] = gamma*(-1.0 - (step / r[i]))
         matrix[i,i] = 1- matrix[i,i-1] - matrix[i,i+1]
-        
-    matrix[0,1]  = (gamma/delta_t)*(-1.0 - (step / r[0]))
+    
+    # Boundary conditions
+    matrix[0,1]  = (gamma)*(-1-(step / r[0]))
     matrix[0,0] = 1.0 - matrix[0,1]
-    matrix[spacesteps_solid-1,spacesteps_solid-2] = (gamma/delta_t)*(-1.0 - (step / r[-1]))
+    matrix[spacesteps_solid-1,spacesteps_solid-2] = (gamma)*(-1+(step / r[-1]))
     matrix[spacesteps_solid-1,spacesteps_solid-1] = 1.0 - matrix[spacesteps_solid-1,spacesteps_solid-2]
 
     return matrix
@@ -465,9 +467,9 @@ def generate_matrix_temperature_solid_phase(d_particle, delta_r, spacesteps_soli
         matrix[i,i] = (1- matrix[i,i-1] - matrix[i,i+1])
         
     # Boundary conditions
-    matrix[0,1]  = (gamma/delta_t)*(-1-(step / r[0]))
+    matrix[0,1]  = (gamma)*(-1-(step / r[0]))
     matrix[0,0] = 1.0 - matrix[0,1]
-    matrix[spacesteps_solid-1,spacesteps_solid-2] = (gamma/delta_t)*(-1-(step / r[-1]))
+    matrix[spacesteps_solid-1,spacesteps_solid-2] = (gamma)*(-1+(step / r[-1]))
     matrix[spacesteps_solid-1,spacesteps_solid-1] = 1.0 - matrix[spacesteps_solid-1,spacesteps_solid-2]
     
     return matrix
@@ -483,7 +485,7 @@ def mass_transfer_coefficient(d_particle, velocity_current, situation, D_f, mu, 
     # Calculate the Reynolds number
     Re = (velocity_current * d_particle)/D_f[situation]
     # Calcalute the Schmidt number
-    Sc = mu / (rho * D_f[situation])
+    Sc = mu / (rho[situation] * D_f[situation])
     # Calculate the Sherwood number according to Gunn (1958)
     Sh = (7 - 10*e + 5*(e**2))*(1 + 0.7*(Re**0.2)*(Sc**(1/3))) + (1.3 - 2.4*e + 1.2*(e**2))*(Re**0.7)*(Sc**(1/3))
     # Calculate the mass transfer coefficient

@@ -25,43 +25,43 @@ def main():
     # Reactor variables
     L_reactor = 1.0     	# Length of reactor (m)
     velocity_inlet = 1.0    # Velocity of the entering reactant gas mixture (m/s)
-    R_cycl = 0.10           # Radius of the reactor (m)
+    R_cycl = 2.5e-2         # Radius of the reactor (m)
     
     # Variables for concentration profile
-    c_A_in = 209.06         # Inlet feed concentration of A (mol/m3)
-    c_B_in = 209.06         # Inlet feed concentration of B (mol/m3)
+    c_A_in = 240.56         # Inlet feed concentration of A (mol/m3)
+    c_B_in = 240.56         # Inlet feed concentration of B (mol/m3)
     c_C_in = 0.0            # Inlet feed concentration of C (mol/m3)
     c_N_in = 0.0            # Inlet feed concentration of N (mol/m3)
     
-    D_f_A = 0.033           # Diffusion coefficient of reactant A in gas (m2/s)
-    D_f_B = 0.033           # Diffusion coefficient of reactant B in gas (m2/s)
-    D_f_C = 0.033           # Diffusion coefficient of reactant C in gas (m2/s)
-    D_f_N = 0.033           # Diffusion coefficient of reactant N in gas (m2/s)
+    D_f_A = 1.0e-4          # Diffusion coefficient of reactant A in gas (m2/s)
+    D_f_B = 1.0e-4          # Diffusion coefficient of reactant B in gas (m2/s)
+    D_f_C = 1.0e-4          # Diffusion coefficient of reactant C in gas (m2/s)
+    D_f_N = 1.0e-4          # Diffusion coefficient of reactant N in gas (m2/s)
     
     # Variables for temperature profile
-    rho_A = 1.0             # Density of the reactant A (kg/m3)
-    rho_B = 1.0             # Density of the reactant B (kg/m3)
-    rho_C = 1.0             # Density of the reactant B (kg/m3)
-    rho_N = 1.0             # Density of the reactant N (kg/m3)
+    rho_A = 5.0             # Density of the reactant A (kg/m3)
+    rho_B = 5.0             # Density of the reactant B (kg/m3)
+    rho_C = 5.0             # Density of the reactant B (kg/m3)
+    rho_N = 5.0             # Density of the reactant N (kg/m3)
     rho_total = (rho_A+rho_B+rho_C+rho_N)/4       # Density of gas mixture (kg / m3)
     
-    Cp_A = 1e3              # Specific heat capacity of the reactant A (Joule/(Kg.K))
-    Cp_B = 1e3              # Specific heat capacity of the reactant B (Joule/(Kg.K))
-    Cp_C = 1e3              # Specific heat capacity of the reactant B (Joule/(Kg.K))
-    Cp_N = 1e3              # Specific heat capacity of the reactant C (Joule/(Kg.K))
+    Cp_A = 1.0e3            # Specific heat capacity of the reactant A (Joule/(Kg.K))
+    Cp_B = 1.0e3            # Specific heat capacity of the reactant B (Joule/(Kg.K))
+    Cp_C = 1.0e3            # Specific heat capacity of the reactant B (Joule/(Kg.K))
+    Cp_N = 1.0e3            # Specific heat capacity of the reactant C (Joule/(Kg.K))
     Cp_total = (Cp_A+Cp_B+Cp_C+Cp_N)/4            # Specific heat capacity of the gas mixture (Joule/(Kg.K))
     
     T_in = 500.0            # Inlet temperature (K)
     
-    k_f = 50e-3             # Thermal conductivity of gas mixture (Watt/(m.K))
+    k_f = 0.14              # Thermal conductivity of gas mixture (Watt/(m.K))
     
     T_wall = 373.15         # Temperature of the reactor wall (K) (condensing steam)
-    U = 0.0005              # Heat transfer coefficient (W/(m*K))
+    U = 5.0e-4              # Heat transfer coefficient (W/(m*K))
     a = 2/R_cycl
 
     # Kinetic parameters
-    delta_H = -5e2          # Reaction ethalpy (J/mol)
-    Ea = 80e3               # Activation energy (J/mol)
+    delta_H = -5.0e2        # Reaction ethalpy (J/mol)
+    Ea = 8.0e4              # Activation energy (J/mol)
     R = 8.314               # Gas constant (J/(K*mol))
     k0 = 3.98e9             # Arrhenius pre-factor (1/s)
     
@@ -75,7 +75,7 @@ def main():
     N_grid_reactor = 30
     
     # Computational stencil parameters
-    delta_t = 1e-3                                # Time-step value (s)
+    delta_t = 1.0e-3                              # Time-step value (s)
     delta_x = L_reactor / N_grid_reactor          # Grid size for reactor transport (m)
     
     """
@@ -93,7 +93,7 @@ def main():
     conc_A_current = np.zeros(spacesteps+1)
     conc_B_current = np.zeros(spacesteps+1)
     conc_C_current = np.zeros(spacesteps+1)
-    conc_N_current = np.ones(spacesteps+1)
+    conc_N_current = np.ones(spacesteps+1)*418.12
     
     # Initial temperature profile (at t=0, overall temperature in reactor is equal to T_wall)
     T_current = np.ones(spacesteps+1)*T_wall
@@ -113,7 +113,7 @@ def main():
     molfraction_N = conc_N_current / (conc_A_current + conc_B_current + conc_C_current + conc_N_current)
     
     """
-    5. Plotting the numerical and analytical solution
+    5. Plotting the numerical solution
     """
     fig = plt.subplots(2,1)
     fig = plt.subplots_adjust(hspace=1.0)
