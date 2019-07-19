@@ -81,7 +81,7 @@ def main():
     """
     2. Discretization of space and determination of the total time duration
     """
-    time = 2.0                                # Total time duration
+    time = 1.0                                # Total time duration
     
     spacesteps = N_grid_reactor                     # Number of steps in reactor
     x = np.linspace(0,L_reactor,spacesteps+1)       # Vector with the steps in reactor
@@ -93,7 +93,7 @@ def main():
     conc_A_current = np.zeros(spacesteps+1)
     conc_B_current = np.zeros(spacesteps+1)
     conc_C_current = np.zeros(spacesteps+1)
-    conc_N_current = np.ones(spacesteps+1)*418.12
+    conc_N_current = np.ones(spacesteps+1)*481.12
     
     # Initial temperature profile (at t=0, overall temperature in reactor is equal to T_wall)
     T_current = np.ones(spacesteps+1)*T_wall
