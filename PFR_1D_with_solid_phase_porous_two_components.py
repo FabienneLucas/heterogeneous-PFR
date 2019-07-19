@@ -102,7 +102,7 @@ def main():
     """
     2. Discretization of space and determination of the total time duration
     """
-    time = 10.0                                     # Total time duration
+    time = 1.0                                     # Total time duration
     
     spacesteps = N_grid_reactor                     # Number of steps in reactor
     x = np.linspace(0,L_reactor,spacesteps+1)       # Vector with the steps in reactor
@@ -117,7 +117,7 @@ def main():
     conc_A_current = np.zeros(spacesteps+1)
     conc_B_current = np.zeros(spacesteps+1)
     conc_C_current = np.zeros(spacesteps+1)
-    conc_N_current = np.ones(spacesteps+1)*418.12
+    conc_N_current = np.ones(spacesteps+1)*481.12
     # Initial concentration profile for solid phase
     conc_A_solid_current = np.zeros((spacesteps+1,spacesteps_solid))
     conc_B_solid_current = np.zeros((spacesteps+1,spacesteps_solid))
@@ -311,10 +311,10 @@ def solver(L_reactor, d_particle, velocity_inlet, spacesteps, spacesteps_solid, 
             T_solid[i,:] = mat_T_sol_inv.dot(vector_T_solid[i,:])
             
             # Calculate the reaction term for the reactants and temperature in the fluid phase
-            reaction_mass_A = (1.0 - e) * 6.0 / d_particle * k_mass_transfer_A * (vector_A[i]-vector_A_solid[i,-1])
-            reaction_mass_B = (1.0 - e) * 6.0 / d_particle * k_mass_transfer_B * (vector_B[i]-vector_B_solid[i,-1])
-            reaction_mass_C = (1.0 - e) * 6.0 / d_particle * k_mass_transfer_C * (vector_C[i]-vector_C_solid[i,-1])
-            reaction_heat = (1.0 - e) * 6.0 / d_particle * k_heat_transfer * (vector_T[i]-vector_T_solid[i,-1])
+            reaction_mass_A = (1.0 - e) * AdivV * k_mass_transfer_A * (vector_A[i]-vector_A_solid[i,-1])
+            reaction_mass_B = (1.0 - e) * AdivV * k_mass_transfer_B * (vector_B[i]-vector_B_solid[i,-1])
+            reaction_mass_C = (1.0 - e) * AdivV * k_mass_transfer_C * (vector_C[i]-vector_C_solid[i,-1])
+            reaction_heat = (1.0 - e) * AdivV * k_heat_transfer * (vector_T[i]-vector_T_solid[i,-1])
             vector_A[i] = vector_A[i]  - reaction_mass_A * delta_t
             vector_B[i] = vector_B[i]  - reaction_mass_B * delta_t
             vector_C[i] = vector_C[i]  - reaction_mass_C * delta_t
@@ -341,9 +341,6 @@ def solver(L_reactor, d_particle, velocity_inlet, spacesteps, spacesteps_solid, 
     C = np.linalg.solve(matrix_C,vector_C)
     N = np.linalg.solve(matrix_N,vector_N)
     T = np.linalg.solve(matrix_T,vector_T)  
-    
-    #print(hwall_store)
-    #print(velocity_store)
     
     return np.linspace(0,L_reactor,spacesteps+1), A, B, C, N, T, A_solid, B_solid, C_solid, T_solid
     
