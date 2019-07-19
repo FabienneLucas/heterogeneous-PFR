@@ -102,7 +102,7 @@ def main():
     conc_A_current = np.zeros(spacesteps+1)
     conc_B_current = np.zeros(spacesteps+1)
     conc_C_current = np.zeros(spacesteps+1)
-    conc_N_current = np.ones(spacesteps+1)*418.12
+    conc_N_current = np.ones(spacesteps+1)*481.12
     conc_A_surface = np.zeros(spacesteps+1)
     conc_B_surface = np.zeros(spacesteps+1)
     
