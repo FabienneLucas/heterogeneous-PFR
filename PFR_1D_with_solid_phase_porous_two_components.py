@@ -288,7 +288,7 @@ def solver(L_reactor, d_particle, velocity_inlet, spacesteps, spacesteps_solid, 
                 k_reaction = (k0 * np.exp(-Ea/(R*vector_T_solid[i,j])))
                 
                 # Calculate the reaction term of the concentration profile of the solid phase
-                reaction_solid = k_reaction * vector_A_solid[i,j] * vector_B_solid[i,j]
+                reaction_solid = k_reaction * vector_A_solid[i,j] * vector_B_solid[i,j] * delta_t
                 
                 # Define the reaction term of the concentration profile of the solid phase
                 vector_A_solid[i,j] = vector_A_solid[i,j] - reaction_solid
