@@ -189,8 +189,6 @@ def main():
     for i in np.linspace(delta_x, N_grid_reactor, 7):
         idx = int(i)
         plt.plot(r, T_solid_current[idx,:], '--o', markersize=3, label='L = %0.4f m' % x[idx])
-    idx = 13
-    plt.plot(r, T_solid_current[idx,:], '--o', markersize=3, label='L = %0.4f m' % x[idx])
     plt.xlabel('Position in solid particle [m]')
     plt.ylabel('Temperature [K]')
     plt.title('Temperature profile within porous particle')
